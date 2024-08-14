@@ -1,22 +1,58 @@
 body {
-	font-size: 2em;
-	background-color: #eee;
+    font-size: 2em;
+    background-color: #eee;
 }
 
 #message {
-	font-size: 1.5em;
-	position: fixed; 
-	bottom: 0;
-	width: 100%;
+    font-size: 1.5em;
+    position: fixed; 
+    bottom: 0;
+    width: 70%; /* Adjusted width to make space for emoji and record buttons */
+}
+
+#emojiBtn {
+    font-size: 1.5em;
+    position: fixed; 
+    bottom: 0;
+    right: 10%;
+    width: 5%;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#recordBtn {
+    font-size: 1.5em;
+    position: fixed; 
+    bottom: 0;
+    right: 0;
+    width: 5%;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#emojiPicker {
+    position: fixed;
+    bottom: 60px;
+    right: 10%;
+    display: none; /* Hidden by default, shown when emoji button is clicked */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    height: 150px;
+    overflow: auto;
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 #chatBox {
-	background-color: #eee;
-	overflow: auto;
+    background-color: #eee;
+    overflow: auto;
 }
 
 .chatMessage {
@@ -26,68 +62,68 @@ body {
 }
 
 .joinMessage {
-	clear: both;
+    clear: both;
 }
 
 p {
-	margin: 10px;
+    margin: 10px;
 }
 
 .currentUser {
-	width: 30em;
-	float: right;
-	text-align: right;
-	clear: both;
-	margin-right: 20px;
+    width: 30em;
+    float: right;
+    text-align: right;
+    clear: both;
+    margin-right: 20px;
 }
 
 .currentUser:after {
-	left: 100%;
-	top: 5%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(255, 255, 255, 0);
-	border-left-color: #fff;
-	border-width: 10px;
-	margin-top: -0px;
+    left: 100%;
+    top: 5%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #fff;
+    border-width: 10px;
+    margin-top: -0px;
 }
 
 .otherUser {
-	width: 30em;
-	margin-left: 20px;
-	clear: both;
+    width: 30em;
+    margin-left: 20px;
+    clear: both;
 }
 
 .otherUser:after {
-	right: 100%;
-	top: 5%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-	border-color: rgba(255, 255, 255, 0);
-	border-right-color: #fff;
-	border-width: 10px;
-	margin-top: -0px;
+    right: 100%;
+    top: 5%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-right-color: #fff;
+    border-width: 10px;
+    margin-top: -0px;
 }
 
 #username {
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .error-msg {
-	color: red;
+    color: red;
 }
 
 .chatMessage {
-	position: relative;
-	margin-bottom: 10px;
+    position: relative;
+    margin-bottom: 10px;
 }
 
 #userTyping {
@@ -100,10 +136,9 @@ p {
 }
 
 h3 {
-	margin-top: 0px;
-
+    margin-top: 0px;
 }
 
 .join {
-	font-weight: 300;
+    font-weight: 300;
 }

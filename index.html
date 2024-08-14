@@ -16,28 +16,35 @@
                         <input class="form-control" type="text" name="something" id="username" placeholder="Enter a Username">    
                     </div>
                     <div class="col-xs-12 col-sm-3">
-                        <button type="submit" id="modalControl" type="button" class="btn btn-primary">Start Chatting!</button>
+                        <button type="submit" id="modalControl" class="btn btn-primary">Start Chatting!</button>
                     </div>
                 </form>
               </div>
                 <p class="error-msg"></p>    
-             
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
+
         <h1 class="center">Friends Talk</h1><br><br>
-        <div id="chatBox">
-            
-            
-        </div><br><br>
+        
+        <div id="chatBox"></div><br><br>
+        
         <form id="messageForm">
-                <span id="userTyping"></span>
-                <input id="message" type="text" name="message">
+            <span id="userTyping"></span>
+            <input id="message" type="text" name="message">
+            <!-- Emoji picker button -->
+            <button type="button" id="emojiBtn" class="btn btn-secondary">😊</button>
+            <!-- Voice recording button -->
+            <button type="button" id="recordBtn" class="btn btn-secondary">🎤</button>
+            <!-- Container for the emoji picker -->
+            <div id="emojiPicker" style="display: none;"></div>
         </form>
     </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <!-- Add Emoji and Voice Recording JavaScript files -->
     <script type="text/javascript" src="/js/script.js"></script>
 </body>
 </html>

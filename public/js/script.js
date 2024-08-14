@@ -7,17 +7,14 @@ $(() => {
         return tag;
     }
 
-
     function joinTemplate(username) {
         /* template for new user joining */
         let tag = "<div class='joinMessage'><p class='center join'>"+ username +" joined the chat.</p></div>";
         return tag;
     }
 
-
     function callModal() {
         /* Modal Controls */
-
         $("#usernameModal").modal({
             backdrop: 'static',
             keyboard: false
@@ -28,10 +25,8 @@ $(() => {
         $("#usernameModal").modal('show');
     }
 
-
     function validateUsername() {
         /* Check that username is not empty */
-
         $("#usernameForm").submit((e) => {
             e.preventDefault();
 
@@ -49,7 +44,6 @@ $(() => {
             }
         });
     }
-
 
     function sendMessage() {
         /* sends a message */
@@ -81,7 +75,6 @@ $(() => {
         });    
     }
 
-
     function getMessage() {
         /* Shows the message sent by some other user on the screen */
         socket.on('msg', (msg) => {
@@ -99,14 +92,12 @@ $(() => {
         });
     }
 
-
     function sendUserTyping() {
         /* tells others that the current user is typing */
         $("#message").on('keypress', () => {
             socket.emit('userTyping', currentUser);
         });
     }
-
 
     function showUserTyping() {
         /* displays on the screen which user is typing */
@@ -133,7 +124,57 @@ $(() => {
         });    
     }
 
-    
+    // Emoji Picker Logic
+    function initializeEmojiPicker() {
+        // Dummy emoji picker logic - integrate a real library like emoji-picker-element or similar
+        $('#emojiBtn').on('click', () => {
+            $('#emojiPicker').toggle(); // Toggle the emoji picker display
+        });
+
+        // Simulate emoji selection
+        $('#emojiPicker').on('click', 'span', function() {
+            const emoji = $(this).text();
+            $('#message').val($('#message').val() + emoji); // Append the selected emoji to the input
+        });
+    }
+
+    // Voice Recording Logic
+    function initializeVoiceRecording() {
+        let isRecording = false;
+        let recorder, audioStream;
+
+        $('#recordBtn').on('click', async () => {
+            if (!isRecording) {
+                // Start recording
+                isRecording = true;
+                $('#recordBtn').text('Stop Recording');
+                audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recorder = new MediaRecorder(audioStream);
+                recorder.start();
+
+                recorder.ondataavailable = (e) => {
+                    // Send recorded audio to the server
+                    const audioBlob = new Blob([e.data], { type: 'audio/webm' });
+                    socket.emit('voiceMsg', { user: currentUser, audio: audioBlob });
+                };
+            } else {
+                // Stop recording
+                isRecording = false;
+                $('#recordBtn').text('🎤');
+                recorder.stop();
+                audioStream.getTracks().forEach(track => track.stop());
+            }
+        });
+
+        // Play received voice messages
+        socket.on('voiceMsg', (data) => {
+            const audioURL = URL.createObjectURL(data.audio);
+            const audioElement = new Audio(audioURL);
+            $(messageTemplate(data.user, 'otherUser', 'Sent a voice message', chatColors[users.indexOf(data.user)])).appendTo("#chatBox");
+            audioElement.play();
+        });
+    }
+
     // initialize socket
     var socket = io();
     
@@ -176,4 +217,10 @@ $(() => {
     
     // displays on the screen which user joined the chat room
     showWhichUserJoin();
+
+    // Initialize Emoji Picker
+    initializeEmojiPicker();
+
+    // Initialize Voice Recording
+    initializeVoiceRecording();
 });

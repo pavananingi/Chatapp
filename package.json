@@ -1,18 +1,26 @@
 {
   "name": "chatapp",
   "version": "1.0.0",
-  "description": "A simple chat application with emoji and voice recording support",
+  "description": "Js and html",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Kunal Yadav",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavananingi/Chatapp.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavananingi/Chatapp/issues"
+  },
+  "homepage": "https://github.com/pavananingi/Chatapp#readme",
   "dependencies": {
-    "express": "*",
-    "socket.io": "^2.0.3",
-    "emoji-picker-element": "^1.0.0",  // For handling emojis
-    "recorder-js": "^1.0.0"            // For handling voice recording
-  }
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {}
 }

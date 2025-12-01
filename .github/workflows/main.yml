@@ -1,1 +1,53 @@
-Hello
+name: Deploy to Firebase Hosting on PR merge
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - uat
+
+jobs:
+  Buid-and-Deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      # - name: Upload build artifacts
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: dist
+      #     path: dist
+
+      # - name: Download build artifacts
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: dist
+
+      - name: Set up Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            firebase deploy --only hosting:surveyor-pro
+          elif [ "${{ github.ref }}" == "refs/heads/dev" ]; then
+            firebase deploy --only hosting:surveyor-dev
+          elif [ "${{ github.ref }}" == "refs/heads/uat" ]; then
+            firebase deploy --only hosting:surveyor-uat
+          fi
